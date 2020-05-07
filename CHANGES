@@ -1,3 +1,16 @@
+Version 0.1.3:
+ - Altera arquivos VERSION e CHANGES para 0.1.3
+ - Empacota nova versão da gem
+ - Corrige arquivo de versões
+ - Adiciona parametro 'uri' que estava faltando
+ - Gera nova versão da gem
+
+Version 0.1.2:
+ - Altera arquivos VERSION e CHANGES para 0.1.2
+ - Atualiza version.rb
+ - Corrige atributo no método update
+ - Adiciona verificação de SSL como parametro opciona
+
 Version 0.1.1:
  - Empacota a versão 0.1.1
  - Verifica se a resposta do find não é nula
