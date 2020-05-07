@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Application Request for Interage'
   spec.description   = 'Use Net::HTTP to make requests'
-  spec.homepage      = 'https://gitlab.com/interage/patterns/request'
+  spec.homepage      = 'https://github.com/IASH-gems/application-request'
   spec.licenses      = ['MIT']
 
   if spec.respond_to?(:metadata)
