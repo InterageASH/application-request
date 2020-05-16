@@ -51,14 +51,7 @@ module Interage
       alias ssl? ssl
 
       def http
-        @http ||= begin
-          http = Net::HTTP.new(uri.hostname, uri.port)
-
-          http.use_ssl = true if ssl?
-          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-          http
-        end
+        @http ||= Net::HTTP.new(uri.hostname, uri.port, use_ssl: ssl?)
       end
 
       def request
