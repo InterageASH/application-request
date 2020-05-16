@@ -64,6 +64,7 @@ module Store
       ::Store::Order
     end
   end
+end
 
 # app/models/order.rb
 class Order < ApplicationForm
