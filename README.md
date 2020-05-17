@@ -69,6 +69,76 @@ end
 # app/models/order.rb
 class Order < ApplicationForm
   attr_accessor :client_name, :payment_form
+
+  def requester
+    @requester ||= ::Store::OrderRequest.new
+  end
+
+  private
+
+  def changeable_attributes
+    { client_name: client_name, payment_form: payment_form }
+  end
+end
+```
+
+## Controller usage
+
+```ruby
+# frozen_string_literal: true
+
+class OrdersController < ApplicationController
+  before_action :set_new_order, only: [:new, :create]
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
+
+  def index
+    @orders = Order.paginate(params[:page])
+  end
+
+  def new
+  end
+
+  def create
+    if @order.create(order_params)
+      redirect_to orders_path
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @order.update(order_params)
+      redirect_to orders_path
+    else
+      render :edit
+    end
+  end
+
+  def show
+  end
+
+  def destroy
+    @order.destroy
+
+    redirect_to orders_path
+  end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:name, :age)
+  end
+
+  def set_new_order
+    @order = Order.new
+  end
+
+  def set_order
+    @order = Order.find(params[:id])
+  end
 end
 ```
 
