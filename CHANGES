@@ -1,3 +1,16 @@
+Version 0.2.0:
+ - Cria binário de publicar gem
+ - Atualiza Documentação
+ - Ajusta binário do CI
+ - Altera url do repositório git
+ - Ajusta README
+ - Atualiza documentação
+ - Ajusta geradores e adiciona form
+ - Adiciona gem empacotadas no gitignore
+ - Refatora a classe ApplicationRequest
+ - Atualiza arquivo de versão
+ - Atualiza dependencias de desenvolvimento
+
 Version 0.1.3:
  - Altera arquivos VERSION e CHANGES para 0.1.3
  - Empacota nova versão da gem

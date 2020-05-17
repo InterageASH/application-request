@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -e
+
+source config;
+
+execute bin/ci;
+
+execute release_start;
+
+CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`;
+RELEASE_VERSION=${CURRENT_BRANCH##*/v};
+
+execute gem build interage-request.gemspec;
+
+execute gem push interage-request-${RELEASE_VERSION}.gem;
+
+execute release_finish;
