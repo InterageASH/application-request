@@ -2,11 +2,12 @@
 
 set -e
 
-echo -e "\e[1;36m$ bin/brakeman --force-scan \e[0m"
-bin/brakeman --force-scan
+source config;
 
-echo -e "\e[1;36m$ bin/rubocop \e[0m"
-bin/rubocop
+execute bin/brakeman --force-scan;
 
-echo -e "\e[1;36m$ bin/rspec \e[0m"
-bin/rspec
+execute bin/rubocop;
+
+execute bin/rspec;
+
+success_message CI completed successfully.;
