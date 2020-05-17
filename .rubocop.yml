@@ -2,7 +2,7 @@ require:
   - rubocop-rspec
   - rubocop-performance
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Style/EmptyMethod:
@@ -13,6 +13,27 @@ Style/SymbolArray:
 
 Style/WordArray:
   Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
 
 AllCops:
   TargetRubyVersion: 2.6
