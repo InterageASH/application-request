@@ -43,7 +43,7 @@ module Interage
       end
 
       def klass
-        Interage::Request::Form
+        Interage::Request::Builder
       end
 
       def get(*args)

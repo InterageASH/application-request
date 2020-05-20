@@ -6,7 +6,7 @@ module Interage
   module Request
     class Start
       def self.call(*args)
-        new(*args).perform
+        new(*args).perbuilder
       end
 
       def initialize(klass, uri, params = {}, headers = {}, ssl = false)
@@ -17,7 +17,7 @@ module Interage
         @ssl = ssl
       end
 
-      def perform
+      def perbuilder
         @response = Net::HTTP.start(uri.host, uri.port) do |http|
           http.use_ssl = true if ssl?
 
