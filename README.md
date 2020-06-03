@@ -36,16 +36,16 @@ class ApplicationRequest < ::Interage::ApplicationRequest
 end
 ```
 
-And `ApplicationForm`
+And `ApplicationBuilder`
 
 
 ```ruby
-# app/models/application_form.rb
-class ApplicationForm < ::Interage::ApplicationForm
+# app/builders/application_builder.rb
+class ApplicationBuilder < ::Interage::ApplicationBuilder
 end
 ```
 
-To create a request and form classes you also can use a Rails generator:
+To create a request and builder classes you also can use a Rails generator:
 
 
 ```bash
@@ -55,10 +55,29 @@ rails g interage:request:create store/order client_name payment_form
 This will create this classes:
 
 ```ruby
-# app/requests/orders_request.rb
+# app/requests/store/base_request.rb
 module Store
-  class OrdersRequest < ApplicationRequest
+  class BaseRequest < ::ApplicationRequest
     private
+
+    def api_base_url
+      "#{ENV.fetch('STORE_BASE_URL')}/v1/"
+    end
+
+    def headers
+      { 'Authorization-Token': ENV.fetch('STORE_AUTHORIZATION_TOKEN') }
+    end
+  end
+end
+
+# app/requests/store/orders_request.rb
+module Store
+  class OrdersRequest < ::Store::BaseRequest
+    private
+
+    def key_name
+      :order
+    end
 
     def klass
       ::Store::Order
@@ -66,18 +85,22 @@ module Store
   end
 end
 
-# app/models/order.rb
-class Order < ApplicationForm
-  attr_accessor :client_name, :payment_form
+# app/builders/store/order.rb
+module Store
+  class Order < ApplicationBuilder
+    attr_accessor :client_name,
+                  :payment_form
 
-  def requester
-    @requester ||= ::Store::OrderRequest.new
-  end
+    def requester
+      @requester ||= ::Store::OrdersRequest.new
+    end
 
-  private
+    private
 
-  def changeable_attributes
-    { client_name: client_name, payment_form: payment_form }
+    def changeable_attributes
+      { client_name: client_name,
+        payment_form: payment_form }
+    end
   end
 end
 ```

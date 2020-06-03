@@ -2,7 +2,7 @@
 
 module Interage
   module Request
-    class Form
+    class Builder
       include ActiveModel::Model
 
       attr_accessor :id, :created_at, :updated_at

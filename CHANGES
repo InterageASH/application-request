@@ -1,3 +1,12 @@
+Version 0.2.1:
+ - Ajusta nome do metodo trocado no replace_all
+ - Atualiza documentação
+ - Ajusta gerador de instalar gem - Cria application_request - Cria application_builder
+ - Ajusta gerador de criar request and builder
+ - Renomea classes do tipo form para builder
+ - Atualiza bundle
+ - Ajusta atribuição do parametro 'use_ssl'
+
 Version 0.2.0:
  - Cria binário de publicar gem
  - Atualiza Documentação

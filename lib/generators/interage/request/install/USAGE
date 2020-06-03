@@ -6,3 +6,4 @@ Example:
 
     This will create:
         /app/requests/application_request.rb
+        /app/builders/application_builder.rb

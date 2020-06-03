@@ -18,7 +18,11 @@ module Interage
       end
 
       def perform
-        @response = http.start { |h| h.request(request) }
+        @response = Net::HTTP.start(uri.host, uri.port) do |http|
+          http.use_ssl = true if ssl?
+
+          http.request(request)
+        end
 
         self
       end
@@ -49,10 +53,6 @@ module Interage
                to: :response, allow_nil: true, prefix: true
 
       alias ssl? ssl
-
-      def http
-        @http ||= Net::HTTP.new(uri.hostname, uri.port, use_ssl: ssl?)
-      end
 
       def request
         @request ||= begin

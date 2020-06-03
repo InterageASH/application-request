@@ -9,10 +9,10 @@ module Interage
     end
 
     autoload :Base, 'interage/request/base'
-    autoload :Form, 'interage/request/form'
+    autoload :Builder, 'interage/request/builder'
     autoload :Start, 'interage/request/start'
   end
 
-  autoload :ApplicationForm, 'interage/application_form'
+  autoload :ApplicationBuilder, 'interage/application_builder'
   autoload :ApplicationRequest, 'interage/application_request'
 end
