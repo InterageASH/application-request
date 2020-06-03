@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Interage
-  class ApplicationForm < ::Interage::Request::Form
+  class ApplicationBuilder < ::Interage::Request::Builder
     def self.paginate(*args)
       new.requester.paginate(*args)
     end

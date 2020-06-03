@@ -2,7 +2,9 @@ Description:
     Explain the generator
 
 Example:
-    rails g interage:request:create ClientsByDocument Client
+    rails g interage:request:create store/order client_name payment_form
 
     This will create:
-        /app/requests/clients_by_document_request.rb
+        /app/requests/store/base_request.rb
+        /app/requests/store/orders_request.rb
+        /app/builders/order.rb

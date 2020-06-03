@@ -10,7 +10,7 @@ module Interage
       def create_application_request
         copy_file('application_request.rb', application_request_path)
 
-        copy_file('application_form.rb', application_form_path)
+        copy_file('application_builder.rb', application_builder_path)
       end
 
       private
@@ -19,8 +19,8 @@ module Interage
         Rails.root.join('app/requests/application_request.rb')
       end
 
-      def application_form_path
-        Rails.root.join('app/forms/application_form.rb')
+      def application_builder_path
+        Rails.root.join('app/builders/application_builder.rb')
       end
     end
   end
