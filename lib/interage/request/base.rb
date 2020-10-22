@@ -70,11 +70,15 @@ module Interage
         ::Interage::Request::Start.call(klass,
                                         base_url(path: path),
                                         params,
-                                        headers)
+                                        headers,
+                                        ssl_certificate)
       end
 
       def headers
         {}
+      end
+
+      def ssl_certificate
       end
     end
   end

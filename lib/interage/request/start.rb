@@ -9,17 +9,22 @@ module Interage
         new(*args).perform
       end
 
-      def initialize(klass, uri, params = {}, headers = {})
+      def initialize(klass, uri, ssl_certificate, params = {}, headers = {})
         @klass = klass
         @uri = URI(uri.to_s)
         @params = params
         @headers = headers
+        @ssl_certificate = ssl_certificate
       end
 
       def perform
         http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = ssl?
-        http.verify_mode = OpenSSL::SSL::VERIFY_PEER if ssl?
+
+        if ssl?
+          http.use_ssl = true
+          http.ca_file = ssl_certificate
+          http.verify_mode = OpenSSL::SSL::VERIFY_PEER
+        end
 
         @response = http.request(request)
 
@@ -46,7 +51,7 @@ module Interage
 
       protected
 
-      attr_reader :response, :klass, :uri, :params, :headers
+      attr_reader :response, :klass, :uri, :params, :headers, :ssl_certificate
 
       delegate :code, :body, :message,
                to: :response, allow_nil: true, prefix: true
