@@ -9,20 +9,19 @@ module Interage
         new(*args).perform
       end
 
-      def initialize(klass, uri, params = {}, headers = {}, ssl = false)
+      def initialize(klass, uri, params = {}, headers = {})
         @klass = klass
         @uri = URI(uri.to_s)
         @params = params
         @headers = headers
-        @ssl = ssl
       end
 
       def perform
-        @response = Net::HTTP.start(uri.host, uri.port) do |http|
-          http.use_ssl = true if ssl?
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = ssl?
+        http.verify_mode = OpenSSL::SSL::VERIFY_PEER if ssl?
 
-          http.request(request)
-        end
+        @response = http.request(request)
 
         self
       end
@@ -47,22 +46,24 @@ module Interage
 
       protected
 
-      attr_reader :response, :klass, :uri, :params, :headers, :ssl
+      attr_reader :response, :klass, :uri, :params, :headers
 
       delegate :code, :body, :message,
                to: :response, allow_nil: true, prefix: true
 
-      alias ssl? ssl
+      def ssl?
+        request.uri.scheme == 'https'
+      end
 
       def request
         @request ||= begin
-          request = klass.new(uri)
-          request.body = params.to_json
-          request.content_type = 'application/json'
-          headers.map { |key, value| request[key] = value }
+                       request = klass.new(uri)
+                       request.body = params.to_json
+                       request.content_type = 'application/json'
+                       headers.map { |key, value| request[key] = value }
 
-          request
-        end
+                       request
+                     end
       end
     end
   end
